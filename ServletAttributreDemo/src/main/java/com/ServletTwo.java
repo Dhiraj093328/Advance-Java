@@ -1,26 +1,27 @@
 package com;
 
-import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
 /**
- * Servlet implementation class SevletConfigClass
+ * Servlet implementation class ServletTwo
  */
-//@WebServlet("/SevletConfigClass")
-public class ServletConfigClass extends HttpServlet {
+@WebServlet("/ServletTwo")
+public class ServletTwo extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletConfigClass() {
+    public ServletTwo() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,23 +30,24 @@ public class ServletConfigClass extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		response.setContentType("text/html");
 		PrintWriter pw=response.getWriter();
 		
-		ServletConfig Config=getServletConfig();
-		String n=Config.getInitParameter("name");
-		String s=Config.getInitParameter("surname");
-
-		pw.print("Your init parameter is: "+n+" "+s);
+		String n= request.getParameter("uname");
+		String p=(String) request.getAttribute("surname");
+		pw.print("Hello"+n+" "+p);
 		
-		ServletContext Context=getServletContext();
-		String p=Context.getInitParameter("Project");
-		//String s1=Context.getInitParameter("genral");
+		HttpSession session=request.getSession(true);
+		String s=(String) request.getAttribute("dname");
+		
 
-		pw.print(" Context parameter is: "+p);
+		ServletContext context=getServletContext();
+		String x=(String) context.getAttribute("sname");
+		
+		pw.print(s+" "+x);
 
-		pw.close();
+		
+		
 	}
 
 }
