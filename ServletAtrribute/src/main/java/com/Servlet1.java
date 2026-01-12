@@ -9,19 +9,18 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 /**
- * Servlet implementation class ServletTwo
+ * Servlet implementation class Servlet1
  */
-@WebServlet("/ServletTwo")
-public class ServletTwo extends HttpServlet {
+@WebServlet("/Servlet1")
+public class Servlet1 extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ServletTwo() {
+    public Servlet1() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,23 +30,18 @@ public class ServletTwo extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
-		PrintWriter pw=response.getWriter();
-		
-		String n= request.getParameter("uname");
-		String p=(String) request.getAttribute("surname");
-		pw.print("Hello"+n+" "+p);
-		
-		HttpSession session=request.getSession(true);
-		String s=(String) request.getAttribute("dname");
-		
 
+		String n=request.getParameter("uname");
+		System.out.println("Welcome " +n);
+		request.setAttribute("surname", " Waghmare ");
+		request.getRequestDispatcher("Servlet2").forward(request, response);
+		
+		HttpSession session=request.getSession();
+		session.setAttribute("admin","dname");
+		
+		
 		ServletContext context=getServletContext();
-		String x=(String) context.getAttribute("sname");
-		
-		pw.print(s+" "+x);
-
-		
-		
+		context.setAttribute("sname", "sam");
 	}
 
 }

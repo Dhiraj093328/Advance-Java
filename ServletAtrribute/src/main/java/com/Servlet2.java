@@ -1,10 +1,13 @@
 package com;
 
+import jakarta.servlet.ServletContext;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -27,13 +30,21 @@ public class Servlet2 extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		response.setContentType("text/html");
 		PrintWriter pw=response.getWriter();
 		
-		String n=request.getParameter("uname");
-		pw.print("Hello "+n);
+		String n= request.getParameter("uname");
+		String p=(String) request.getAttribute("surname");
+		pw.print("Hello "+n+" "+p);
+		
+		HttpSession session=request.getSession();
+		String s=(String) request.getAttribute(" admin");
+		
 
+		ServletContext context=getServletContext();
+		String x=(String) context.getAttribute("sname");
+		
+		pw.print(s+" "+x);
 	}
 
 }
