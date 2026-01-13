@@ -36,9 +36,11 @@ public class Servlet1 extends HttpServlet {
 		request.setAttribute("surname", " Waghmare ");
 		request.getRequestDispatcher("Servlet2").forward(request, response);
 		
-		HttpSession session=request.getSession();
-		session.setAttribute("admin","dname");
+		//HttpSession session=request.getSession();
+		//session.setAttribute("admin","dname");
 		
+		HttpSession session=request.getSession();
+		session.setAttribute("admin", "dname");
 		
 		ServletContext context=getServletContext();
 		context.setAttribute("sname", "sam");
