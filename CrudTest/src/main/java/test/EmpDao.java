@@ -45,4 +45,98 @@ public class EmpDao {
         }
         return status;
     }
+
+    public static List<Emp> getAllEmployees() {
+
+        List<Emp> list = new ArrayList<Emp>();
+
+        try {
+            Connection con = EmpDao.getConnection();
+            PreparedStatement ps = con.prepareStatement("select * from usertable");
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Emp e = new Emp();
+                e.setId(rs.getInt(1));
+                e.setName(rs.getString(2));
+                e.setPassword(rs.getString(3));
+                e.setEmail(rs.getString(4));
+                e.setCountry(rs.getString(5));
+
+                list.add(e);
+            }
+            con.close();
+
+        } catch (Exception e1) {
+            System.out.println(e1);
+        }
+        return list;
+    }
+
+    public static int update(Emp e) {
+        int status = 0;
+        try {
+            Connection con = EmpDao.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                "update usertable set name=?, password=?, email=?, country=? where id=?"
+            );
+
+            ps.setString(1, e.getName());
+            ps.setString(2, e.getPassword());
+            ps.setString(3, e.getEmail());
+            ps.setString(4, e.getCountry());
+            ps.setInt(5, e.getId());
+
+            status = ps.executeUpdate();
+            con.close();
+
+        } catch (Exception e1) {
+            System.out.println(e1);
+        }
+        return status;
+    }
+
+    public static Emp getElementById(int id) {
+
+        Emp e = new Emp();
+        try {
+            Connection con = EmpDao.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                "select * from usertable where id=?"
+            );
+            ps.setInt(1, id);
+
+            ResultSet rs = ps.executeQuery();
+            if (rs.next()) {
+                e.setId(rs.getInt(1));
+                e.setName(rs.getString(2));
+                e.setPassword(rs.getString(3));
+                e.setEmail(rs.getString(4));
+                e.setCountry(rs.getString(5));
+            }
+            con.close();
+
+        } catch (Exception e3) {
+            System.out.println(e3);
+        }
+        return e;
+    }
+    
+    public static int delete(int id)
+	{
+		int status=0;
+		try {
+			Connection con=EmpDao.getConnection();
+			PreparedStatement ps=con.prepareStatement("delete from usertable where id=?");
+			ps.setInt(1,id);
+			status=ps.executeUpdate();
+			con.close();
+			
+		}catch(Exception e1)
+		{
+			System.out.println(e1);
+		}
+		
+		return status;
+	}
 }
