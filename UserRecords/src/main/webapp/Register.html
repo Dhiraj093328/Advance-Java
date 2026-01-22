@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Create Account</title>
+<link rel="stylesheet" href="register.css">
+</head>
+<body>
+
+    <div class="background-shapes">
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <div class="login-container">
+
+        <div class="login-header">
+            <h1>Create Account</h1>
+            <p>Join us today and get started</p>
+        </div>
+
+        <form class="login-form" action="index.html" id="registerForm">
+
+            <div class="form-group">
+                <input type="text" name="name" required>
+                <label> Name</label>
+            </div>
+            
+            <div class="form-group">
+                <input type="email" name="Email" required>
+                <label>Email Address</label>
+            </div>
+
+            <div class="form-group">
+                <input type="text" name="uname" required>
+                <label>Username</label>
+            </div>
+
+            <div class="form-group">
+                <input type="password" name="pass" required>
+                <label>Password</label>
+            </div>
+
+            <button type="submit" class="Register-btn">Create Account</button>
+
+        </form>
+        
+        <div class="login-footer">
+            Already have an account? <a href="index.html">Sign in</a>
+        </div>
+    </div>
+
+    <!-- Success Popup -->
+    <div class="popup-overlay" id="popupOverlay">
+        <div class="popup-container">
+            <div class="success-icon">
+                <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+                    <circle cx="40" cy="40" r="38" stroke="#4CAF50" stroke-width="4" class="circle-animate"/>
+                    <path d="M25 40L35 50L55 30" stroke="#4CAF50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" class="check-animate"/>
+                </svg>
+            </div>
+            <h2>Account Created Successfully!</h2>
+            <button class="popup-btn" onclick="closePopup()">Continue</button>
+        </div>
+    </div>
+
+    <script src="register.js"></script>
+
+</body>
+</html>
