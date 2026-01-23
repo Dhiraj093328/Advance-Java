@@ -26,8 +26,19 @@ public class UserServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+	String n=request.getParameter("uname");
+	String e=request.getParameter("email");
+	String c=request.getParameter("city");
+	
+	User u=new User();
+	u.setName(n);
+	u.setEmail(e);
+	u.setCity(c);
+	
+	request.setAttribute("user", u);
+	
+	request.getRequestDispatcher("details.jsp").forward(request, response);
+
 	}
 
 }

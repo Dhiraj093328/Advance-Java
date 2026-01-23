@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+${param.msg} Dhiraj
+<br>
+${10+20}
+<br>
+10 is greate than 20? ${10 > 20}
 </body>
 </html>

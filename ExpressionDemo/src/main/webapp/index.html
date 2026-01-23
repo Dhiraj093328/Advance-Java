@@ -5,11 +5,17 @@
 <title>Insert title here</title>
 </head>
 <body>
-<form action="UserServlet" method="get">
-Username : <input type="text" name="uname">
-Email : <input type="text" name="email">
-City : <input type="text" name="city">
-<input type="submit" value="GO">
+<form action="process.jsp" action="post">
+Message : <input type="text" name="msg">
+<input type="submit" value="send">
+</form>
+
+
+<form action="UserServlet" action="post">
+Username : <input type="text" name="uname"><br>
+Email : <input type="email" name="email"><br>
+City : <input type="text" name="city"><br>
+<input type="submit" value="Submit">
 </form>
 </body>
 </html>

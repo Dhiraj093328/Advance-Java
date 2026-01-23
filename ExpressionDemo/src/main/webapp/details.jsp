@@ -7,6 +7,8 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+Name : ${user.name}<br>
+Email : ${user.email}<br>
+City : ${user.city}
 </body>
 </html>
