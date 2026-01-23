@@ -5,12 +5,13 @@ import java.util.*;
 
 public class EmpDao {
 
+    // 🔹 DB CONNECTION
     public static Connection getConnection() {
         Connection con = null;
         try {
             Class.forName("com.mysql.cj.jdbc.Driver");
             con = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/crudtestdb",
+                "jdbc:mysql://localhost:3306/u_records",
                 "root",
                 "Dhiraj@0933"
             );
@@ -20,123 +21,56 @@ public class EmpDao {
         return con;
     }
 
-    public static int save(Emp e) {
-        int status = 0;
-        try {
-            Connection con = EmpDao.getConnection();
+    // 🔹 LOGIN VALIDATION
+    public static boolean validate(String username, String password) {
+        boolean status = false;
 
+        try {
+            Connection con = UserDao.getConnection();
             PreparedStatement ps = con.prepareStatement(
-                "INSERT INTO usertable (id, name, password, email, country) VALUES (?, ?, ?, ?, ?)"
+                "SELECT * FROM usertable WHERE name=? AND password=?"
             );
 
-            ps.setInt(1, e.getId());
-            ps.setString(2, e.getName());
-            ps.setString(3, e.getPassword());
-            ps.setString(4, e.getEmail());
-            ps.setString(5, e.getCountry());
+            ps.setString(1, username);
+            ps.setString(2, password);
 
-            status = ps.executeUpdate();
+            ResultSet rs = ps.executeQuery();
+            status = rs.next(); // true = valid login
 
-            ps.close();
             con.close();
-
-        } catch (Exception ex) {
-            System.out.println(ex);
+        } catch (Exception e) {
+            System.out.println(e);
         }
         return status;
     }
 
-    public static List<Emp> getAllEmployees() {
+    // 🔹 GET ALL USERS (for table display if needed)
+    public static List<User> getAllUsers() {
 
-        List<Emp> list = new ArrayList<Emp>();
+        List<User> list = new ArrayList<User>();
 
         try {
-            Connection con = EmpDao.getConnection();
-            PreparedStatement ps = con.prepareStatement("select * from usertable");
+            Connection con = UserDao.getConnection();
+            PreparedStatement ps = con.prepareStatement(
+                "SELECT id, name, email, country FROM usertable"
+            );
+
             ResultSet rs = ps.executeQuery();
 
             while (rs.next()) {
-                Emp e = new Emp();
-                e.setId(rs.getInt(1));
-                e.setName(rs.getString(2));
-                e.setPassword(rs.getString(3));
-                e.setEmail(rs.getString(4));
-                e.setCountry(rs.getString(5));
+                User u = new User();
+                u.setId(rs.getInt(1));
+                u.setName(rs.getString(2));
+                u.setEmail(rs.getString(3));
+                u.setCountry(rs.getString(4));
 
-                list.add(e);
+                list.add(u);
             }
             con.close();
 
-        } catch (Exception e1) {
-            System.out.println(e1);
+        } catch (Exception e) {
+            System.out.println(e);
         }
         return list;
     }
-
-    public static int update(Emp e) {
-        int status = 0;
-        try {
-            Connection con = EmpDao.getConnection();
-            PreparedStatement ps = con.prepareStatement(
-                "update usertable set name=?, password=?, email=?, country=? where id=?"
-            );
-
-            ps.setString(1, e.getName());
-            ps.setString(2, e.getPassword());
-            ps.setString(3, e.getEmail());
-            ps.setString(4, e.getCountry());
-            ps.setInt(5, e.getId());
-
-            status = ps.executeUpdate();
-            con.close();
-
-        } catch (Exception e1) {
-            System.out.println(e1);
-        }
-        return status;
-    }
-
-    public static Emp getElementById(int id) {
-
-        Emp e = new Emp();
-        try {
-            Connection con = EmpDao.getConnection();
-            PreparedStatement ps = con.prepareStatement(
-                "select * from usertable where id=?"
-            );
-            ps.setInt(1, id);
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                e.setId(rs.getInt(1));
-                e.setName(rs.getString(2));
-                e.setPassword(rs.getString(3));
-                e.setEmail(rs.getString(4));
-                e.setCountry(rs.getString(5));
-            }
-            con.close();
-
-        } catch (Exception e3) {
-            System.out.println(e3);
-        }
-        return e;
-    }
-    
-    public static int delete(int id)
-	{
-		int status=0;
-		try {
-			Connection con=EmpDao.getConnection();
-			PreparedStatement ps=con.prepareStatement("delete from usertable where id=?");
-			ps.setInt(1,id);
-			status=ps.executeUpdate();
-			con.close();
-			
-		}catch(Exception e1)
-		{
-			System.out.println(e1);
-		}
-		
-		return status;
-	}
 }
