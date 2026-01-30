@@ -1,0 +1,26 @@
+<hibernate-mapping package="test">
+
+    <class name="Employee" table="employee" discriminator-value="EMP">
+
+        <id name="id">
+            <generator class="increment"/>
+        </id>
+
+        <!-- Discriminator column (THIS FIXES THE ERROR) -->
+        <discriminator column="emp_type" type="string"/>
+
+        <property name="name"/>
+
+        <subclass name="Reg_emp" discriminator-value="REG">
+            <property name="salary"/>
+            <property name="bonus"/>
+        </subclass>
+
+        <subclass name="Contract_emp" discriminator-value="CON">
+            <property name="pay_per_hour"/>
+            <property name="contract_period"/>
+        </subclass>
+
+    </class>
+
+</hibernate-mapping>
