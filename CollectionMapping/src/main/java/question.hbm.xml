@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<hibernate-mapping>
+    <class name="test.Question" table="Questions">
+        <id name="id" column="Id">
+            <generator class="increment"/>
+        </id>
+
+        <property name="qname" column="qname"/>
+
+        <list name="answers" table="Answers" cascade="all">
+            <key column="qid"/>
+            <index column="answer_index"/>
+            <element column="answer" type="string"/>
+        </list>
+    </class>
+</hibernate-mapping>
