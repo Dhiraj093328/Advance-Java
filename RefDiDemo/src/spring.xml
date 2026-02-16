@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- bean definitions here -->
+	<bean id="a1" class="com.model.Address">
+    <property name="city" value="Merut"/>
+    <property name="state" value="UP"/>
+    <property name="country" value="India"/>
+    <property name="pincode" value="421004"/>
+</bean>
+
+<bean id="e1" class="com.model.Employee">
+    <property name="id" value="101"/>
+    <property name="name" value="Anand Ogale"/>
+    <property name="address" ref="a1"/>
+</bean>
+
+</beans>

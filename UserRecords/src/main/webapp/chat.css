@@ -1,0 +1,44 @@
+@charset "UTF-8";
+body {
+    font-family: Arial;
+    background: #e5ddd5;
+}
+
+.chat-container {
+    height: 400px;
+    overflow-y: scroll;
+    padding: 10px;
+    background: #fff;
+    margin-bottom: 10px;
+}
+
+.sent {
+    background: #dcf8c6;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 10px;
+    text-align: right;
+}
+
+.received {
+    background: #fff;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 10px;
+    text-align: left;
+}
+.sent {
+    background: #dcf8c6;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 10px;
+    text-align: right;
+}
+
+.received {
+    background: #ffffff;
+    padding: 8px;
+    margin: 5px;
+    border-radius: 10px;
+    text-align: left;
+}
