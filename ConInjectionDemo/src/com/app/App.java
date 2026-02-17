@@ -11,7 +11,6 @@ public class App {
         ApplicationContext context =
                 new ClassPathXmlApplicationContext("spring.xml");
 
-        // Use Person, not Employee
-        //Person person = context.getBean("person");
+        
     }
 }
